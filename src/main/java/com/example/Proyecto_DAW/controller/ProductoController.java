@@ -38,6 +38,32 @@ public class ProductoController {
         return "redirect:/productos";
     }
 
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Producto producto = productoService.getProductById(id);
+        model.addAttribute("producto", producto);
+        model.addAttribute("categorias", categoriaService.listarCategorias());
+        return "productos/edit";
+    }
+
+    @PostMapping("/actualizar/{id}")
+    public String actualizarProducto(@PathVariable Long id,
+                                     @ModelAttribute Producto producto,
+                                     @RequestParam("categoria.idCategoria") Long categoriaId) {
+        producto.setIdProducto(id); // aseguramos que mantiene el mismo ID
+        producto.setCategoria(categoriaService.obtenerPorId(categoriaId));
+        productoService.updateProduct(producto);
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/ver/{id}")
+    public String verProducto(@PathVariable Long id, Model model) {
+        Producto producto = productoService.getProductById(id);
+        model.addAttribute("producto", producto);
+        return "productos/detail";
+    }
+
+
     @GetMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id) {
         productoService.deleteProduct(id);

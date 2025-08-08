@@ -42,6 +42,10 @@ public class ProductoService {
                 .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
     }
 
+    public Producto updateProduct(Producto producto) {
+        return productRepository.save(producto);
+    }
+
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
             throw new IllegalArgumentException("No se puede eliminar. Producto no encontrado con ID: " + id);

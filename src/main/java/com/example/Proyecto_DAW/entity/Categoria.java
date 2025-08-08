@@ -17,6 +17,7 @@ public class Categoria {
     @NotBlank(message = "El nombre de la categoría es obligatorio")
     private String nombre;
 
+    @NotBlank(message = "La descripción de la categoría es obligatoria")
     private String descripcion;
 
     @OneToMany(mappedBy = "categoria")

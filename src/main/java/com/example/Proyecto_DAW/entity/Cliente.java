@@ -32,15 +32,33 @@ public class Cliente {
     @Pattern(regexp = "\\d{9}", message = "El teléfono debe tener 9 dígitos")
     private String telefono;
 
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "direccion")
+    @Size(max = 100, message = "La dirección no puede exceder los 100 caracteres")
+    @NotBlank(message = "La dirección es obligatoria")
+    private String direccion;
+
     public Cliente() {
         // Constructor por defecto
     }
 
-    public Cliente(String telefono, String correo, String apellidos, String nombre) {
+    public Cliente(String telefono, String correo, String apellidos, String nombre, Long idCliente) {
+        this.idCliente = idCliente;
         this.telefono = telefono;
         this.correo = correo;
         this.apellidos = apellidos;
         this.nombre = nombre;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre() {

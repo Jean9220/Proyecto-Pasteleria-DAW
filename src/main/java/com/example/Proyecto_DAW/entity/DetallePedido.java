@@ -30,7 +30,8 @@ public class DetallePedido {
         // Constructor por defecto
     }
 
-    public DetallePedido(BigDecimal subtotal, int cantidad, Producto producto, Pedido pedido) {
+    public DetallePedido(BigDecimal subtotal, int cantidad, Producto producto, Pedido pedido, Long idDetalle) {
+        this.idDetalle = idDetalle;
         this.subtotal = subtotal;
         this.cantidad = cantidad;
         this.producto = producto;
