@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -21,7 +23,7 @@ public class ProductoRestController {
     @Autowired
     private ProductoService productoService;
 
-    // Listar productos usando ProductoResponseDTO
+    // Java
     @GetMapping
     public List<ProductoResponseDTO> listarProductos() {
         List<Producto> productos = productoService.getAllProducts();
@@ -33,7 +35,7 @@ public class ProductoRestController {
             dto.setDescripcion(producto.getDescripcion());
             dto.setPrecio(producto.getPrecio());
             dto.setStock(producto.getStock());
-            dto.setImagen(producto.getImagen()); // Ajusta según tu entidad
+            dto.setImagen(producto.getImagen());
             dto.setIdCategoria(producto.getCategoria().getIdCategoria());
             dto.setNombreCategoria(producto.getCategoria().getNombre());
             productosDTO.add(dto);

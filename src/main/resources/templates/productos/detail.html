@@ -10,7 +10,7 @@
     <h1>Detalle del Producto</h1>
 
     <div class="card" style="max-width: 500px;">
-        <img th:if="${producto.imagen}" th:src="${producto.imagen}" class="card-img-top" alt="Imagen del producto">
+        <img th:if="${producto.imagen}" th:src="@{/productos/uploads/{filename}(filename=${producto.imagen})}" alt="Imagen del producto" class="card-img-top" />
         <div class="card-body">
             <h5 class="card-title" th:text="${producto.nombre}"></h5>
             <p class="card-text"><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>

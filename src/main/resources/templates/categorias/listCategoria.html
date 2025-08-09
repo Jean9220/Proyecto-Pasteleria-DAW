@@ -20,6 +20,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -27,10 +28,15 @@
                 <td th:text="${c.idCategoria}">1</td>
                 <td th:text="${c.nombre}">Tortas</td>
                 <td th:text="${c.descripcion}">Descripción</td>
+                <td>
+                    <a th:href="@{/categorias/editar/{id}(id=${c.idCategoria})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a th:href="@{/categorias/eliminar/{id}(id=${c.idCategoria})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
             </tr>
             <tr th:if="${#lists.isEmpty(categorias)}">
                 <td colspan="3" class="text-center">No hay categorías registradas.</td>
             </tr>
+
             </tbody>
         </table>
     </div>

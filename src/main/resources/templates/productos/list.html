@@ -21,7 +21,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" th:each="producto : ${productos}">
             <div class="card h-100">
-                <img th:src="@{'/img/' + ${producto.imagen}}" class="card-img-top" th:alt="${producto.nombre}">
+                <img th:if="${producto.imagen}" th:src="@{/productos/uploads/{filename}(filename=${producto.imagen})}" alt="Imagen del producto" class="card-img-top" />
                 <div class="card-body">
                     <h5 class="card-title" th:text="${producto.nombre}">Nombre</h5>
                     <p class="card-text" th:text="${producto.descripcion}">Descripción</p>

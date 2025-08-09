@@ -3,10 +3,21 @@ package com.example.Proyecto_DAW.controller;
 import com.example.Proyecto_DAW.entity.Producto;
 import com.example.Proyecto_DAW.service.CategoriaService;
 import com.example.Proyecto_DAW.service.ProductoService;
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/productos")
@@ -32,10 +43,31 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public String guardarProducto(@ModelAttribute Producto producto, @RequestParam("categoria.idCategoria") Long categoriaId) {
+    public String guardarProducto(@ModelAttribute Producto producto,
+                                  @RequestParam("categoria.idCategoria") Long categoriaId,
+                                  @RequestParam("archivoImagen") MultipartFile imagenFile) throws IOException {
         producto.setCategoria(categoriaService.obtenerPorId(categoriaId));
+        if (!imagenFile.isEmpty()) {
+            String nombreArchivo = UUID.randomUUID() + "_" + imagenFile.getOriginalFilename();
+            Path ruta = Paths.get("uploads").resolve(nombreArchivo);
+            // Crear la carpeta 'uploads' si no existe
+            Path carpetaUploads = Paths.get("uploads");
+            if (!Files.exists(carpetaUploads)) {
+                Files.createDirectories(carpetaUploads);
+            }
+            Files.copy(imagenFile.getInputStream(), ruta);
+            producto.setImagen(nombreArchivo);
+        }
         productoService.createProduct(producto);
         return "redirect:/productos";
+    }
+
+    @GetMapping("/uploads/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> verImagen(@PathVariable String filename) throws MalformedURLException {
+        Path ruta = Paths.get("uploads").resolve(filename);
+        Resource recurso = new UrlResource(ruta.toUri());
+        return ResponseEntity.ok().body(recurso);
     }
 
     @GetMapping("/editar/{id}")

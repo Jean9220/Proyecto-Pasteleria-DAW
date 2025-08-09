@@ -53,6 +53,38 @@ public class CategoriaController {
         }
     }
 
+    // MOSTRAR FORMULARIO DE EDICIÓN
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Long id, Model model) {
+        Categoria categoria = categoriaService.obtenerPorId(id);
+        model.addAttribute("categoria", categoria);
+        model.addAttribute("pageTitle", "Editar categoría");
+        return "categorias/editCategoria";
+    }
+
+    // ACTUALIZAR CATEGORÍA
+    @PostMapping("/actualizar/{id}")
+    public String actualizar(@PathVariable Long id,
+                             @Valid @ModelAttribute("categoria") Categoria categoria,
+                             BindingResult result,
+                             Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("pageTitle", "Editar categoría");
+            return "categorias/editCategoria";
+        }
+
+        try {
+            categoria.setIdCategoria(id); // mantenemos el ID original
+            categoriaService.crearCategoria(categoria); // reutilizamos el mismo método save
+            return "redirect:/categorias";
+        } catch (Exception e) {
+            model.addAttribute("pageTitle", "Editar categoría");
+            model.addAttribute("errorMsg", e.getMessage());
+            return "categorias/editCategoria";
+        }
+    }
+
     // ELIMINAR
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {

@@ -1,4 +1,4 @@
-package com.example.E_commerce_Proyecto.entity;
+package com.example.Proyecto_DAW.entity;
 
 import jakarta.persistence.*;
 
