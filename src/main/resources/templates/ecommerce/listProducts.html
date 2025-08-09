@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color: #fff0f5;
+        }
+        /* Hero */
+        .hero {
+            background: url('/ruta/a/tu/imagen/banner.jpg') center/cover no-repeat;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-weight: bold;
+            font-size: 3rem;
+        }
+
+        /* Categorías */
+        .categoria-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        .categoria-card a {
+            display: block;
+            padding: 8px 12px;
+            color: #333;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .categoria-card a:hover,
+        .categoria-card a.active {
+            background-color: #ffe4ec;
+            font-weight: bold;
+        }
+
+        /* Productos */
+        .card {
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+            border: none;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
+    <style>
+        .hero {
+            background: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuGGr3HWAmOWj_hIEFGnsb7Wx1qS2f4OSESkRROoCCWx-zryoZ1DVXCmY0sZf12KBalItk-7QnOos5cAx9JOPBb4rzkDSDNEwCdk6YqgZDpSY82iMgVdf6FpeyLDyeIEYY4wwZ3OZUn3j95Ke5e6OqpPUWz5MHs3InmKDXkXZYB_iFEj7a9LF4McWiJdBoE1d_T4FjtMV2tSC1u-Jo4aBgER2pYih3eCsKw96eIAuw--bfOkpGP2LlSEzcTRWjDOt3TJq9LLF_uMQ')
+                        center/cover no-repeat;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        /* Capa oscura encima de la imagen */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold text-pink" href="#">Delicias</a>
+
+        <!-- Botón para menú móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Galería</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+            </ul>
+
+            <!-- Iconos a la derecha -->
+            <ul class="navbar-nav ms-auto align-items-center">
+                <!-- Carrito -->
+                <li class="nav-item me-3">
+                    <a class="nav-link position-relative" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+                        <i class="bi bi-cart3 fs-4"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                              th:text="${cantidadCarrito}">0</span>
+                    </a>
+                </li>
+                <!-- Botón login -->
+                <li class="nav-item">
+                    <a class="btn btn-pink text-white px-3" style="background-color:#ff80ab;" href="#">
+                        <i class="bi bi-person"></i> Iniciar Sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Modal lateral del Carrito -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold">Tu Carrito</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+        <!-- Lista de productos del carrito -->
+        <div class="flex-grow-1 overflow-auto">
+            <div class="d-flex align-items-center mb-3 pb-3 border-bottom" th:each="item : ${items}">
+                <img th:if="${item.imagen}" th:src="@{/productos/uploads/{filename}(filename=${item.imagen})}"
+                     alt="Imagen del producto" class="rounded me-3" style="width:80px; height:80px; object-fit:cover;"/>
+                <div class="flex-grow-1">
+                    <h6 class="mb-1" th:text="${item.nombreProducto}">Producto</h6>
+                    <small class="text-muted" th:text="${item.categoriaNombre}">Categoría</small>
+                    <div class="d-flex align-items-center mt-2">
+                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                            <input type="hidden" name="cantidad" value="-1"/>
+                            <button class="btn btn-sm btn-outline-secondary">-</button>
+                        </form>
+                        <span class="mx-2 fw-bold" th:text="${item.cantidad}">1</span>
+                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                            <input type="hidden" name="cantidad" value="1"/>
+                            <button class="btn btn-sm btn-outline-secondary">+</button>
+                        </form>
+                    </div>
+                </div>
+                <p class="fw-bold text-end text-danger mb-0">S/ <span th:text="${#numbers.formatDecimal(item.precioUnitario * item.cantidad, 1, 'POINT', 2, 'NONE')}">0.00</span></p>
+                <form th:action="@{/ecommerce/carrito/quitar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                    <button type="submit" class="btn btn-danger btn-sm ms-2">Quitar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Resumen del carrito -->
+        <div class="border-top pt-3">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal</span>
+                <span class="fw-bold">S/ <span th:text="${total}">0.00</span></span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Envío</span>
+                <span class="fw-bold">S/ 10.00</span>
+            </div>
+            <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
+                <span>Total</span>
+                <span>S/ <span th:text="${totalConEnvio}">0.00</span></span>
+            </div>
+            <a href="/ecommerce/checkout" class="btn w-100 text-white" style="background-color:#ff80ab;">Finalizar Compra</a>
+        </div>
+    </div>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>El Arte de la Repostería</h1>
+        <p>Descubre creaciones únicas horneadas con amor y los mejores ingredientes.</p>
+    </div>
+</header>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Categorías -->
+        <div class="col-md-3 mb-4">
+            <div class="categoria-card">
+                <h5 class="mb-3">Categorías</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a th:href="@{/ecommerce/productos}"
+                           th:classappend="${categoriaSeleccionada} == null ? 'active' : ''">
+                            <i class="bi bi-grid"></i> Todos
+                        </a>
+                    </li>
+                    <li th:each="cat : ${categorias}">
+                        <a th:href="@{/ecommerce/productos/categoria/{id}(id=${cat.idCategoria})}"
+                           th:classappend="${cat.idCategoria} == ${categoriaSeleccionada} ? 'active' : ''">
+                            <i class="bi bi-cake"></i>
+                            <span th:text="${cat.nombre}">Categoría</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lista de productos -->
+        <div class="col-md-9">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" th:each="producto : ${productos}">
+                    <div class="card h-100">
+                        <img th:if="${producto.imagen}" th:src="@{/productos/uploads/{filename}(filename=${producto.imagen})}"
+                             alt="Imagen del producto" class="card-img-top" />
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${producto.nombre}">Nombre</h5>
+                            <p class="fw-bold text-danger">S/ <span th:text="${producto.precio}">0.00</span></p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a th:href="@{/productos/ver/{id}(id=${producto.idProducto})}" class="btn btn-outline-primary btn-sm">Detalles</a>
+                            <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${producto.idProducto})}" method="post" style="display:inline;">
+                                <input type="hidden" name="cantidad" value="1"/>
+                                <button type="submit" class="btn btn-pink btn-sm" style="background-color:#ff80ab;color:white;">Agregar al Carrito</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

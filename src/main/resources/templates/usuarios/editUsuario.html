@@ -24,8 +24,8 @@
     <div class="mb-3">
         <label class="form-label">Estado</label>
         <select class="form-select" th:field="*{estado}" required>
-            <option th:value="ACTIVO" th:selected="${usuario.estado == T(com.example.Proyecto_DAW.entity.Usuario.Estado).ACTIVO}">Activo</option>
-            <option th:value="INACTIVO" th:selected="${usuario.estado == T(com.example.Proyecto_DAW.entity.Usuario.Estado).INACTIVO}">Inactivo</option>
+            <option th:value="ACTIVO" th:selected="${usuario.estado == T(com.example.Proyecto_DAW.admin.entity.Usuario.Estado).ACTIVO}">Activo</option>
+            <option th:value="INACTIVO" th:selected="${usuario.estado == T(com.example.Proyecto_DAW.admin.entity.Usuario.Estado).INACTIVO}">Inactivo</option>
         </select>
     </div>
 
