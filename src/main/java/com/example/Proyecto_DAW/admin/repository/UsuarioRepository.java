@@ -1,9 +1,14 @@
 package com.example.Proyecto_DAW.admin.repository;
 
-import com.example.Proyecto_DAW.admin.entity.Usuario;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
-@Repository
-public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+import com.example.Proyecto_DAW.admin.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    Optional<Usuario> findByEmailAndClave(String email, String clave);
+
+    long countByRol(String rol);
+    long countByRolAndEstado(String rol, Usuario.Estado estado);
 }
+

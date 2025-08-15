@@ -12,9 +12,9 @@ public class CarritoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Referencia al ID del producto del microservicio de Admin.
-    @Column(name = "id_producto")
-    private Long idProducto;
+    @ManyToOne
+    @JoinColumn(name = "id_producto", nullable = false)
+    private Producto producto;
 
     // Cantidad de este producto en el carrito
     private Integer cantidad;
@@ -37,13 +37,15 @@ public class CarritoItem {
     public CarritoItem() {
     }
 
-    public CarritoItem(Carrito carrito, String nombreProducto, BigDecimal precioUnitario, Integer cantidad, Long id, Long idProducto) {
-        this.carrito = carrito;
-        this.nombreProducto = nombreProducto;
-        this.precioUnitario = precioUnitario;
-        this.cantidad = cantidad;
+    public CarritoItem(Long id, Producto producto, Integer cantidad, BigDecimal precioUnitario, String imagen, String nombreProducto, String categoriaNombre, Carrito carrito) {
         this.id = id;
-        this.idProducto = idProducto;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.imagen = imagen;
+        this.nombreProducto = nombreProducto;
+        this.categoriaNombre = categoriaNombre;
+        this.carrito = carrito;
     }
 
     public String getImagen() {
@@ -86,12 +88,12 @@ public class CarritoItem {
         this.cantidad = cantidad;
     }
 
-    public Long getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public Long getId() {
@@ -108,5 +110,10 @@ public class CarritoItem {
 
     public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    public BigDecimal getSubtotal() {
+        if (precioUnitario == null || cantidad == null) return BigDecimal.ZERO;
+        return precioUnitario.multiply(BigDecimal.valueOf(cantidad));
     }
 }

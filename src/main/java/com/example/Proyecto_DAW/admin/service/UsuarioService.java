@@ -47,4 +47,12 @@ public class UsuarioService {
         }
         usuarioRepository.deleteById(id);
     }
+
+    public long getTotalAdmins() {
+        return usuarioRepository.countByRol("ADMIN");
+    }
+
+    public long getAdminsActivos() {
+        return usuarioRepository.countByRolAndEstado("ADMIN", Usuario.Estado.ACTIVO);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 		"com.example.Proyecto_DAW.admin",
 		"com.example.Proyecto_DAW.ecommerce",
 })
+
 public class ProyectoDawApplication {
 
 	public static void main(String[] args) {

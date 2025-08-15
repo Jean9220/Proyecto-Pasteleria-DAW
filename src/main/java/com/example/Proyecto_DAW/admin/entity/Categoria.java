@@ -20,7 +20,7 @@ public class Categoria {
     @NotBlank(message = "La descripción de la categoría es obligatoria")
     private String descripcion;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Producto> productos;
 

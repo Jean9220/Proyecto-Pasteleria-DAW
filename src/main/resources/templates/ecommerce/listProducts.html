@@ -7,71 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <style>
+        /* ======== GLOBAL ======== */
         body {
-            background-color: #fff0f5;
-        }
-        /* Hero */
-        .hero {
-            background: url('/ruta/a/tu/imagen/banner.jpg') center/cover no-repeat;
-            padding: 100px 0;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        .hero h1 {
-            font-weight: bold;
-            font-size: 3rem;
+            background-color: #f4fbf2; /* tono 50 */
         }
 
-        /* Categorías */
-        .categoria-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        }
-        .categoria-card a {
-            display: block;
-            padding: 8px 12px;
-            color: #333;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-        .categoria-card a:hover,
-        .categoria-card a.active {
-            background-color: #ffe4ec;
-            font-weight: bold;
-        }
-
-        /* Productos */
-        .card {
-            border-radius: 10px;
-            transition: transform 0.2s ease-in-out;
-            border: none;
-            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-    </style>
-    <style>
+        /* ======== HERO ======== */
         .hero {
             background: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuGGr3HWAmOWj_hIEFGnsb7Wx1qS2f4OSESkRROoCCWx-zryoZ1DVXCmY0sZf12KBalItk-7QnOos5cAx9JOPBb4rzkDSDNEwCdk6YqgZDpSY82iMgVdf6FpeyLDyeIEYY4wwZ3OZUn3j95Ke5e6OqpPUWz5MHs3InmKDXkXZYB_iFEj7a9LF4McWiJdBoE1d_T4FjtMV2tSC1u-Jo4aBgER2pYih3eCsKw96eIAuw--bfOkpGP2LlSEzcTRWjDOt3TJq9LLF_uMQ')
                         center/cover no-repeat;
@@ -84,7 +25,6 @@
             color: white;
         }
 
-        /* Capa oscura encima de la imagen */
         .hero::before {
             content: "";
             position: absolute;
@@ -108,14 +48,165 @@
             max-width: 600px;
             margin: auto;
         }
+
+        /* ======== CATEGORÍAS ======== */
+        .categoria-card {
+            background: linear-gradient(135deg, #e7f7e1, #cdeec4);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .categoria-card h5 {
+            font-weight: bold;
+            color: #2d572c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .categoria-card ul {
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .categoria-card a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: #2d572c;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .categoria-card a i {
+            background: #a6df96;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .categoria-card a:hover,
+        .categoria-card a.active {
+            background-color: #a6df96;
+            color: white;
+        }
+
+        .categoria-card a:hover i,
+        .categoria-card a.active i {
+            background: white;
+            color: #2d572c;
+        }
+
+        /* ======== PRODUCTOS ======== */
+        .card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid #a6df96;
+        }
+
+        .card-body h5 {
+            font-weight: bold;
+            color: #2d572c;
+        }
+
+        .card-body p {
+            font-size: 1.1rem;
+            color: #2d572c;
+        }
+
+        .card-footer {
+            background: #f4fbf2;
+            border-top: none;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ======== BOTONES ======== */
+        .btn-outline-primary {
+            border-color: #a6df96;
+            color: #2d572c;
+        }
+
+        .btn-outline-primary:hover {
+            background: #a6df96;
+            color: white;
+        }
+
+        .btn-pink {
+            background-color: #a6df96 !important;
+            color: white;
+            font-weight: 500;
+        }
+
+        .btn-pink:hover {
+            background-color: #8fcc7f !important;
+        }
+
+        .btn-outline-secondary {
+            border-color: #a6df96;
+            color: #2d572c;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #a6df96;
+            color: white;
+        }
+
+        /* ======== NAVBAR ======== */
+        .navbar {
+            background-color: #e7f7e1 !important;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: #cdeec4;
+            border-radius: 4px;
+        }
+
+        /* ======== CARRITO ======== */
+        .offcanvas {
+            background-color: #f4fbf2;
+        }
+
+        .offcanvas-header {
+            background-color: #e7f7e1;
+        }
+
+        .offcanvas-body {
+            background-color: #f4fbf2;
+        }
+
+        /* ======== PRECIOS ======== */
+        .text-danger {
+            color: #2d572c !important;
+        }
     </style>
+
 </head>
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand fw-bold text-pink" href="#">Delicias</a>
+        <a class="navbar-brand fw-bold text-pink" href="#">Pastelería GluGlu</a>
 
         <!-- Botón para menú móvil -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
@@ -124,14 +215,7 @@
 
         <!-- Enlaces -->
         <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Galería</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
-            </ul>
-
-            <!-- Iconos a la derecha -->
+              <!-- Iconos a la derecha -->
             <ul class="navbar-nav ms-auto align-items-center">
                 <!-- Carrito -->
                 <li class="nav-item me-3">
@@ -141,10 +225,9 @@
                               th:text="${cantidadCarrito}">0</span>
                     </a>
                 </li>
-                <!-- Botón login -->
                 <li class="nav-item">
-                    <a class="btn btn-pink text-white px-3" style="background-color:#ff80ab;" href="#">
-                        <i class="bi bi-person"></i> Iniciar Sesión
+                    <a class="btn btn-outline-danger px-3" href="/logout">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                     </a>
                 </li>
             </ul>
@@ -168,19 +251,21 @@
                     <h6 class="mb-1" th:text="${item.nombreProducto}">Producto</h6>
                     <small class="text-muted" th:text="${item.categoriaNombre}">Categoría</small>
                     <div class="d-flex align-items-center mt-2">
-                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.producto.idProducto})}" method="post">
                             <input type="hidden" name="cantidad" value="-1"/>
                             <button class="btn btn-sm btn-outline-secondary">-</button>
                         </form>
                         <span class="mx-2 fw-bold" th:text="${item.cantidad}">1</span>
-                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                        <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${item.producto.idProducto})}" method="post">
                             <input type="hidden" name="cantidad" value="1"/>
                             <button class="btn btn-sm btn-outline-secondary">+</button>
                         </form>
                     </div>
                 </div>
-                <p class="fw-bold text-end text-danger mb-0">S/ <span th:text="${#numbers.formatDecimal(item.precioUnitario * item.cantidad, 1, 'POINT', 2, 'NONE')}">0.00</span></p>
-                <form th:action="@{/ecommerce/carrito/quitar/{idProducto}(idProducto=${item.idProducto})}" method="post">
+                <p class="fw-bold text-end text-danger mb-0">
+                    S/ <span th:text="${#numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'NONE')}">0.00</span>
+                </p>
+                <form th:action="@{/ecommerce/carrito/quitar/{idProducto}(idProducto=${item.producto.idProducto})}" method="post">
                     <button type="submit" class="btn btn-danger btn-sm ms-2">Quitar</button>
                 </form>
             </div>
@@ -200,7 +285,7 @@
                 <span>Total</span>
                 <span>S/ <span th:text="${totalConEnvio}">0.00</span></span>
             </div>
-            <a href="/ecommerce/checkout" class="btn w-100 text-white" style="background-color:#ff80ab;">Finalizar Compra</a>
+            <a th:href="@{/ecommerce/factura}" class="btn w-100 text-white" style="background-color:#ff80ab;">Finalizar Compra</a>
         </div>
     </div>
 </div>
@@ -249,7 +334,7 @@
                             <p class="fw-bold text-danger">S/ <span th:text="${producto.precio}">0.00</span></p>
                         </div>
                         <div class="card-footer text-center">
-                            <a th:href="@{/productos/ver/{id}(id=${producto.idProducto})}" class="btn btn-outline-primary btn-sm">Detalles</a>
+                            <a th:href="@{/ecommerce/verDetalle/{id}(id=${producto.idProducto})}" class="btn btn-outline-primary btn-sm">Detalles</a>
                             <form th:action="@{/ecommerce/carrito/agregar/{idProducto}(idProducto=${producto.idProducto})}" method="post" style="display:inline;">
                                 <input type="hidden" name="cantidad" value="1"/>
                                 <button type="submit" class="btn btn-pink btn-sm" style="background-color:#ff80ab;color:white;">Agregar al Carrito</button>
@@ -263,5 +348,19 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:if="${abrirCarrito}" th:inline="javascript">
+    var cartSidebar = new bootstrap.Offcanvas(document.getElementById('cartSidebar'));
+    cartSidebar.show();
+</script>
+<script>
+    window.addEventListener('beforeunload', function (e) {
+        // Llama a /logout usando fetch (petición asíncrona)
+        navigator.sendBeacon('/logout');
+    });
+</script>
+<script th:if="${error}" th:inline="javascript">
+    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    errorModal.show();
+</script>
 </body>
 </html>

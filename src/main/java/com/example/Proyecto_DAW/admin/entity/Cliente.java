@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -41,16 +43,28 @@ public class Cliente {
     @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
 
+    @Column(name = "estado", nullable = false)
+    private String estado; // Ejemplo: "ACTIVO" o "INACTIVO"
+
+    @Column(name = "fecha_registro", nullable = false)
+    private LocalDateTime fechaRegistro;
+
+    @Column(name = "rol")
+    private String rol; // Ejemplo: "CLIENTE"
+
     public Cliente() {
         // Constructor por defecto
     }
 
-    public Cliente(String telefono, String correo, String apellidos, String nombre, Long idCliente) {
+    public Cliente(Long idCliente, String nombre, String apellidos, String correo, String telefono, String password, String direccion, String rol) {
         this.idCliente = idCliente;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.apellidos = apellidos;
         this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.password = password;
+        this.direccion = direccion;
+        this.rol = rol;
     }
 
     public Long getIdCliente() {
@@ -91,5 +105,45 @@ public class Cliente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

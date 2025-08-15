@@ -9,16 +9,21 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
+
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "apellidos")
     private String apellidos;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "clave")
-    private String Clave;
-    @Column(name = "reestablecer")
-    private Boolean reestablecer;
+    private String clave;
+
+    @Column(name = "rol")
+    private String rol; // Ejemplo: "ADMIN"
 
     private Estado estado;
 
@@ -29,54 +34,14 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, Estado estado, Boolean reestablecer, String clave, String correo, String apellidos, String nombres) {
+    public Usuario(Long idUsuario, String nombre, String apellidos, String email, String clave, String rol, Estado estado) {
         this.idUsuario = idUsuario;
-        this.estado = estado;
-        this.reestablecer = reestablecer;
-        Clave = clave;
-        email = email;
+        this.nombre = nombre;
         this.apellidos = apellidos;
-        this.nombre = nombre;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Boolean getReestablecer() {
-        return reestablecer;
-    }
-
-    public void setReestablecer(Boolean reestablecer) {
-        this.reestablecer = reestablecer;
-    }
-
-    public String getClave() {
-        return Clave;
-    }
-
-    public void setClave(String clave) {
-        Clave = clave;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.clave = clave;
+        this.rol = rol;
+        this.estado = estado;
     }
 
     public Long getIdUsuario() {
@@ -87,11 +52,51 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getApellidos() {
         return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 }

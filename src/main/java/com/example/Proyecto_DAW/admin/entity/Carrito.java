@@ -32,12 +32,12 @@ public class Carrito {
     public Carrito() {
     }
 
-    public Carrito(Long id, List<CarritoItem> items, LocalDateTime fechaActualizacion, LocalDateTime fechaCreacion, Long clienteId) {
+    public Carrito(Long id, Long clienteId, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, List<CarritoItem> items) {
         this.id = id;
-        this.items = items;
-        this.fechaActualizacion = fechaActualizacion;
-        this.fechaCreacion = fechaCreacion;
         this.clienteId = clienteId;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacion = fechaActualizacion;
+        this.items = items;
     }
 
     public Long getId() {
