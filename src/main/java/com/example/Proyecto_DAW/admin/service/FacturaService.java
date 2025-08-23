@@ -73,7 +73,6 @@ public class FacturaService {
             dto.setTotal(ventasPorDia.get(dia));
             resultado.add(dto);
         }
-        // Agrega esto antes de retornar el resultado
         System.out.println("Ventas por día: " + ventasPorDia);
         return resultado;
     }
@@ -171,7 +170,6 @@ public class FacturaService {
         if (!carrito.getItems().isEmpty()) {
             pedido.setProducto(carrito.getItems().get(0).getProducto());
         }
-        // Guardar pedido en la BD
         Pedido pedidoGuardado = facturaRepository.save(pedido);
         for (CarritoItem item : carrito.getItems()) {
             Producto producto = productoRepository.findById(item.getProducto().getIdProducto()).orElseThrow();
@@ -189,7 +187,6 @@ public class FacturaService {
             producto.setStock(nuevoStock);
             productoRepository.save(producto);
         }
-        // Registrar pago
         Pago pago = new Pago();
         pago.setPedido(pedidoGuardado);
         pago.setMetodoPago(datosPago.getMetodoPago());

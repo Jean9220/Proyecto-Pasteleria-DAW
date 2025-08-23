@@ -137,7 +137,6 @@ public class ProductoController {
     public String handleIllegalStateException(IllegalStateException ex, Model model) {
         model.addAttribute("error", ex.getMessage());
         model.addAttribute("productos", productoService.getAllProducts());
-        // Si usas categorías en la vista, también puedes agregarlas:
         model.addAttribute("categorias", categoriaService.listarCategorias());
         return "admin/productos/list";
     }

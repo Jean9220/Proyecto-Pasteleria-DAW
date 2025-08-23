@@ -26,7 +26,7 @@ public class Pedido {
 
     @NotBlank
     @Column(length = 20)
-    private String estado; // Ej: PENDIENTE, ENTREGADO, CANCELADO
+    private String estado;
 
     @Column(name = "direccion_envio", length = 255)
     private String direccion;
@@ -42,7 +42,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "id_producto")
-    @OnDelete(action = OnDeleteAction.CASCADE) // Requiere import org.hibernate.annotations.OnDelete
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Producto producto;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)

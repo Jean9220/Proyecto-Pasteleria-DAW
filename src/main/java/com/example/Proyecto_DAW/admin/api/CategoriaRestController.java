@@ -22,7 +22,6 @@ public class CategoriaRestController {
     @Autowired
     private ProductoService productoService;
 
-    // Listar todas las categorías usando CategoriaResponseDTO
     @GetMapping
     public List<CategoriaResponseDTO> listarCategorias() {
         List<Categoria> categorias = categoriaService.listarCategorias();

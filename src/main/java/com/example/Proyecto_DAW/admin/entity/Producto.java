@@ -31,7 +31,6 @@ public class Producto {
     private Categoria categoria;
 
     public Producto() {
-        // Constructor por defecto
     }
 
     public Producto(Categoria categoria, String imagen, Integer stock, BigDecimal precio, String descripcion, String nombre, Long idProducto) {

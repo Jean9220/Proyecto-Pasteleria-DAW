@@ -31,7 +31,6 @@ public class ClienteService {
         return clienteRepository.count();
     }
 
-    // Clientes activos (asumiendo que tienes un campo 'estado' en Cliente)
     public long getClientesActivos() {
         return clienteRepository.findAll().stream()
                 .filter(c -> "ACTIVO".equalsIgnoreCase(c.getEstado()))

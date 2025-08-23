@@ -27,7 +27,6 @@ public class Pago {
     private String metodoPago;
 
     public Pago() {
-        // Constructor por defecto
     }
 
     public Pago(String metodoPago, LocalDateTime fechaPago, BigDecimal monto,Pedido pedido) {

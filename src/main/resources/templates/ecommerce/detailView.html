@@ -94,15 +94,14 @@
     </div>
 </div>
 
-<script>
-    // Manejo de selección de cantidad
+<script th:inline="javascript">
     document.querySelectorAll('.btn-cantidad').forEach(btn => {
         btn.addEventListener('click', function () {
             const unidades = this.getAttribute('data-unidades');
-            const idProducto = /*[[${producto.idProducto}]]*/ 0;
+            const idProducto = [[${producto.idProducto}]];
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = `/ecommerce/carrito/agregar/${idProducto}`;
+            form.action = `/ecommerce/carrito/agregar/` + idProducto;
             const inputCantidad = document.createElement('input');
             inputCantidad.type = 'hidden';
             inputCantidad.name = 'cantidad';

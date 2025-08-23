@@ -20,7 +20,6 @@ public class CarritoService {
     @Autowired
     private ProductoService productoService;
 
-    // Obtiene el carrito de un cliente, o lo crea si no existe
     public Carrito getCarrito(Long clienteId) {
         Optional<Carrito> carritoOpt = carritoRepository.findAll().stream()
                 .filter(c -> c.getClienteId().equals(clienteId))

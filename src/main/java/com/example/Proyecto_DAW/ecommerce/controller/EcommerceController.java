@@ -182,7 +182,6 @@ public class EcommerceController {
         return "ecommerce/detailView";
     }
 
-    // Agregar producto al carrito
     @PostMapping("/carrito/agregar/{idProducto}")
     public String agregarAlCarrito(@PathVariable Long idProducto, @RequestParam(defaultValue = "1") int cantidad, Model model, HttpSession session) {
         String rol = (String) session.getAttribute("rol");
@@ -205,7 +204,6 @@ public class EcommerceController {
         return "ecommerce/listProducts";
     }
 
-    // Quitar producto del carrito
     @PostMapping("/carrito/quitar/{idProducto}")
     public String quitarDelCarrito(@PathVariable Long idProducto, Model model, HttpSession session) {
         String rol = (String) session.getAttribute("rol");
@@ -228,7 +226,6 @@ public class EcommerceController {
         return "ecommerce/listProducts";
     }
 
-    // Mostrar el carrito
     @GetMapping("/carrito")
     public String verCarrito(Model model, HttpSession session) {
         String rol = (String) session.getAttribute("rol");
@@ -247,7 +244,7 @@ public class EcommerceController {
         return "ecommerce/carrito";
     }
 
-    //Factura y pagooooooooooooooooooooooooo
+    //Factura y pago
 
     @GetMapping("/factura")
     public String verFactura(Model model, HttpSession session) {
@@ -261,7 +258,6 @@ public class EcommerceController {
         }
         Carrito carrito = carritoService.getCarrito(clienteId);
 
-        // Validar stock antes de mostrar la factura
         for (CarritoItem item : carrito.getItems()) {
             Producto producto = productoService.getProductById(item.getProducto().getIdProducto());
             if (item.getCantidad() > producto.getStock()) {
@@ -294,7 +290,6 @@ public class EcommerceController {
         }
         Carrito carrito = carritoService.getCarrito(clienteId);
 
-        // Validación de pago
         if ("Tarjeta".equalsIgnoreCase(datosPago.getMetodoPago())) {
             if (datosPago.getNumeroTarjeta() == null || datosPago.getNumeroTarjeta().length() != 16) {
                 model.addAttribute("error", "Número de tarjeta inválido");
@@ -303,12 +298,10 @@ public class EcommerceController {
                 model.addAttribute("datosPago", datosPago);
                 return "ecommerce/factura";
             }
-            // Puedes agregar más validaciones aquí (CVV, fecha, etc.)
         }
 
         Pedido pedido = facturaService.procesarPagoYRegistrarOrden(carrito, datosPago);
 
-        // Guarda los ítems para la confirmación
         session.setAttribute("itemsCompra", carrito.getItems());
 
         carritoService.vaciarCarrito(clienteId);
@@ -325,7 +318,6 @@ public class EcommerceController {
         if (pedido == null) {
             return "redirect:/ecommerce";
         }
-        // Recupera los ítems guardados en sesión
         List<CarritoItem> itemsCompra = (List<CarritoItem>) session.getAttribute("itemsCompra");
         ConfirmacionDTO confirmacion = facturaService.obtenerConfirmacionCompra(pedido, itemsCompra != null ? itemsCompra : List.of());
         model.addAttribute("confirmacion", confirmacion);
@@ -345,14 +337,12 @@ public class EcommerceController {
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
 
-        // Encabezado
         document.add(new Paragraph("Factura #" + pedido.getIdPedido()));
         document.add(new Paragraph("Fecha: " + pedido.getFechaPedido()));
         document.add(new Paragraph("Cliente: " + pedido.getCliente().getNombre() + " " + pedido.getCliente().getApellidos()));
         document.add(new Paragraph("Dirección: " + pedido.getDireccion()));
         document.add(new Paragraph(" "));
 
-        // Tabla de productos
         PdfPTable table = new PdfPTable(4);
         table.addCell("Producto");
         table.addCell("Cantidad");
@@ -366,14 +356,12 @@ public class EcommerceController {
         }
         document.add(table);
 
-        // Totales
         document.add(new Paragraph(" "));
         document.add(new Paragraph("Subtotal: S/ " + pedido.getSubtotal()));
         document.add(new Paragraph("Envío: S/ 10.00"));
         document.add(new Paragraph("Impuestos: S/ " + pedido.getSubtotal().multiply(new java.math.BigDecimal("0.18"))));
         document.add(new Paragraph("Total: S/ " + pedido.getTotal()));
 
-        // Datos de pago
         if (pago != null) {
             document.add(new Paragraph(" "));
             document.add(new Paragraph("Método de Pago: " + pago.getMetodoPago()));
@@ -384,7 +372,6 @@ public class EcommerceController {
         document.close();
     }
 
-    // EcommerceController.java
     @GetMapping("/index")
     public String mostrarIndex(Model model) {
         Producto productoDestacado = productoService.getProductoMasVendido();
@@ -398,7 +385,6 @@ public class EcommerceController {
                 .toList();
         model.addAttribute("productosDestacados", productosDestacados);
 
-        // Agrega los más vendidos
         List<Producto> productosMasVendidos = productoService.getProductosMasVendidos(3); // método personalizado
         model.addAttribute("productosMasVendidos", productosMasVendidos);
 

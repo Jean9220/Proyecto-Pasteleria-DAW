@@ -18,7 +18,6 @@ public class ProductoRestController {
     @Autowired
     private ProductoService productoService;
 
-    // Java
     @GetMapping
     public List<ProductoResponseDTO> listarProductos() {
         List<Producto> productos = productoService.getAllProducts();
@@ -38,7 +37,6 @@ public class ProductoRestController {
         return productosDTO;
     }
 
-    // Obtener detalle de producto usando ProductoDetalleResponseDTO
     @GetMapping("/{id}")
     public ProductoDetalleResponseDTO obtenerProducto(@PathVariable Long id) {
         Producto producto = productoService.getProductById(id);

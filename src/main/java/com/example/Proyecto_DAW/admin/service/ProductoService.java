@@ -94,7 +94,6 @@ public class ProductoService {
         if (resultados.isEmpty()) return null;
         Object[] fila = resultados.get(0);
         String nombreProducto = (String) fila[0];
-        // Busca el producto por nombre (puedes ajustar si tienes el ID en el query)
         return productRepository.findAll().stream()
                 .filter(p -> p.getNombre().equals(nombreProducto))
                 .findFirst()

@@ -14,8 +14,6 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relaciona el carrito con el cliente
-    // Podrías usar el ID del cliente del Admin, si lo pasas al E-commerce
     @Column(name = "cliente_id")
     private Long clienteId;
 
@@ -25,7 +23,6 @@ public class Carrito {
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
 
-    // El Carrito tiene una lista de CarritoItems
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarritoItem> items = new ArrayList<>();
 

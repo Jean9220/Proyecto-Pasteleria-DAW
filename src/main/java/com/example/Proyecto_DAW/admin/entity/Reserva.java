@@ -26,7 +26,6 @@ public class Reserva {
     private String notasEspeciales;
 
     public Reserva() {
-        // Constructor por defecto
     }
 
     public Reserva(int idReserva, Cliente cliente, Producto producto, LocalDate fechaEntrega, String notasEspeciales) {

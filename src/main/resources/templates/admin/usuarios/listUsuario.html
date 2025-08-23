@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Gestión de Usuarios</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         .main-container {
             display: flex;
@@ -12,7 +15,6 @@
             background-color: #ffffff;
         }
         .content-wrapper {
-            max-width: 1200px; /* ancho máximo */
             margin: 0 auto; /* centrado */
             flex: 1;
             padding: 40px 30px; /* más espacio alrededor */
@@ -44,21 +46,51 @@
 
 <div class="main-container">
 
-    <!-- NAVBAR -->
-    <nav class="bg-black text-white px-6 py-4 flex justify-between items-center shadow-md">
-    <h4 class="mb-0 text-lg font-bold">Hecho con Amor</h4>
-        <div class="flex gap-4">
-            <a href="/index" class="hover:bg-gray-200 hover:text-black px-3 py-1 rounded">Inicio</a>
-            <a href="/usuarios" class="hover:bg-gray-200 hover:text-black px-3 py-1 rounded">Usuarios</a>
-            <a href="/categorias" class="hover:bg-gray-200 hover:text-black px-3 py-1 rounded">Categorías</a>
-            <a href="/productos" class="hover:bg-gray-200 hover:text-black px-3 py-1 rounded">Productos</a>
-            <a href="/clientes" class="hover:bg-gray-200 hover:text-black px-3 py-1 rounded">Clientes</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Hecho con Amor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/index">
+                            <i class="bi bi-house-door me-2"></i>Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuarios">
+                            <i class="bi bi-people me-2"></i>Usuarios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categorias">
+                            <i class="bi bi-tags me-2"></i>Categorías
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/productos">
+                            <i class="bi bi-box-seam me-2"></i>Productos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/clientes">
+                            <i class="bi bi-box-seam me-2"></i>Clientes
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
+
     <!-- CONTENIDO -->
     <div class="content-wrapper">
-
         <div class="flex justify-between items-center mb-6">
             <p class="text-gray-900 text-2xl font-bold">Gestión de Administradores</p>
             <a th:href="@{/usuarios/new}" class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-blue-700">
@@ -123,5 +155,7 @@
     </footer>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

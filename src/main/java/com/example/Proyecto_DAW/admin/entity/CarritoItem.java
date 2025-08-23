@@ -16,20 +16,16 @@ public class CarritoItem {
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
-    // Cantidad de este producto en el carrito
     private Integer cantidad;
 
-    // Guarda una copia del precio en el momento que fue añadido al carrito
     private BigDecimal precioUnitario;
 
     private String imagen;
 
-    // Guarda una copia del nombre del producto
     private String nombreProducto;
 
     private String categoriaNombre;
 
-    // Relación con la entidad Carrito
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carrito_id")
     private Carrito carrito;
