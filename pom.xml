@@ -9,14 +9,14 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 
 	<groupId>Proyecto-DAW</groupId>
 	<artifactId>proyecto-integrado</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Pasteleria</name>
-	<description>Proyecto de pasteleria xdddddddddddddddddddddddd</description>
+	<description>Proyecto de pasteleria</description>
 
 	<properties>
 		<java.version>21</java.version>
